@@ -1,8 +1,11 @@
-# React + Vite
+# Winflex frontend para el control de producción
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>Control de las 3 areas de producción</p>
+<ul>
+  <li>Extrusión</li>
+  <li>Impresión</li>
+  <li>Sellado</li>
+</ul>
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
