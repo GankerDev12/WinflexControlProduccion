@@ -3,7 +3,7 @@ import { openSidebar, closeSidebar, onOpenModal, onCloseModal, showForm } from '
 
 
 export const useUiStore = () => {
-    const { toOpenSidebar, isModalOpen, setForm } = useSelector(state => state.ui)
+    const { toOpenSidebar, isModalOpen } = useSelector(state => state.ui)
     const dispatch = useDispatch();
 
     const onOpenSidebar = () => {
@@ -30,7 +30,6 @@ export const useUiStore = () => {
         //*Propiedades
         toOpenSidebar,
         isModalOpen,
-        setForm,
 
         //* Metodos
         onOpenSidebar,

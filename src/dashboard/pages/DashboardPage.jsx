@@ -7,7 +7,7 @@ import { Content } from "../../components/Content";
 export const DashboardPage = () => {
 
     return (
-        <div className="min-h-screen grid grid-col-1 lg:grid-cols-6">
+        <div className=" grid grid-col-1 lg:grid-cols-6">
             {/* SideBar */}
             <Sidebar />
             <FloatButton />

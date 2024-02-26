@@ -5,7 +5,7 @@ export const uiSlice = createSlice({
     initialState: {
         toOpenSidebar: false,
         isModalOpen: false,
-        setForm: { payload: "" }
+        setForm: ""
     },
     reducers: {
         openSidebar: (state) => {
@@ -20,10 +20,10 @@ export const uiSlice = createSlice({
         onCloseModal: (state) => {
             state.isModalOpen = false;
         },
-        showForm: (state) => {
-            state.setForm = state.payload
+        showForm: (state, action) => {
+            state.setForm = action.payload
         }
     },
 });
 
-export const { openSidebar, closeSidebar, onOpenModal, onCloseModal, showForm } = uiSlice.actions;
+export const { openSidebar, closeSidebar, onOpenModal, onCloseModal, showForm, setForm } = uiSlice.actions;

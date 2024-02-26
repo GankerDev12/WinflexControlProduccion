@@ -12,7 +12,7 @@ export const Sidebar = () => {
 
     return (
 
-        <div className={`fixed lg:static w-[50%] lg:w-full top-0 ${toOpenSidebar ? "-left-0" : "-left-full"} h-full col-span-1 overflow-y-scroll border-r bg-white z-50  transition-all scrollbar-none drop-shadow-sm`}>
+        <div className={`fixed lg:static w-[50%] lg:w-full top-0 ${toOpenSidebar ? "-left-0" : "-left-full"} h-screen col-span-1 overflow-y-scroll border-r bg-white z-50  transition-all scrollbar-none drop-shadow-sm`}>
             {/* Logotipo */}
             <div className="p-6">
                 <Link to="/">
@@ -77,14 +77,8 @@ export const Sidebar = () => {
                         </li>
                     </ul>
                 </nav>
-                {/* Img and Logout */}
+                {/* Logout */}
                 <div>
-                    <img src="chartImg.svg" alt="chart" />
-                    <div className="bg-blue-100 p-4 flex flex-col gap-4 rounded-3xl">
-                        <h3 className="text-xl text-center">Get upgrade</h3>
-                        <p className="text-gray-500 text-center">Lorem ipsum, dolor sit amet.</p>
-                        <button className="hover:bg-blue-400 hover:text-white text-gray-400 p-2 rounded-lg">Learn more</button>
-                    </div>
                     <a onClick={startLogout} className="flex items-center gap-4 my-8 text-gray-400 font-semibold hover:bg-blue-400 hover:cursor-pointer p-4 hover:text-white rounded-lg transition-colors">
                         <RiLogoutBoxRLine />
                         Logout

@@ -5,10 +5,8 @@ import { Header } from '../../../components/Header'
 import { Sidebar } from '../../../components/Sidebar'
 import { useUiStore } from '../../../hooks/useUiStore'
 import { RiAddFill } from 'react-icons/ri'
-import { useDispatch } from 'react-redux'
 
 export const GestionPage = () => {
-    const dispatch = useDispatch()
     const { openModal, onSetForm } = useUiStore()
     const productos = useRef(null)
     const operadores = useRef(null)
@@ -67,7 +65,7 @@ export const GestionPage = () => {
                             <button
                                 className='bg-blue-400 text-white text-sm p-2 rounded-md flex items-center gap-2 hover:bg-blue-300'
                                 onClick={() => {
-                                    dispatch(onSetForm({ payload: "productos" }));
+                                    onSetForm("productos")
                                     openModal();
                                 }}
                             >
@@ -82,12 +80,12 @@ export const GestionPage = () => {
                         <h1 className='text-2xl font-semibold mt-2'>Operadores</h1>
                         <div className='flex justify-end mb-2'>
                             <Button
-                                onClick={() => {
-                                    openModal();
-                                    // setModal('operadores')
-                                }}
                                 title={"Nuevo operador"}
                                 children={<RiAddFill />}
+                                onClick={() => {
+                                    onSetForm("operadores")
+                                    openModal();
+                                }}
                             />
                         </div>
                         <LayoutModal />
@@ -96,7 +94,14 @@ export const GestionPage = () => {
                     <div ref={maquinas} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Máquinas</h1>
                         <div className='flex justify-end mb-2'>
-                            <Button onClick={openModal} title={"Nueva máquina"} children={<RiAddFill />} />
+                            <Button
+                                title={"Nueva máquina"}
+                                children={<RiAddFill />}
+                                onClick={() => {
+                                    onSetForm("maquinas")
+                                    openModal();
+                                }}
+                            />
                         </div>
                         <LayoutModal />
                         <Table />
@@ -104,7 +109,14 @@ export const GestionPage = () => {
                     <div ref={fabricantes} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Fabricantes</h1>
                         <div className='flex justify-end mb-2'>
-                            <Button onClick={openModal} title={"Nuevo fabricante"} children={<RiAddFill />} />
+                            <Button
+                                title={"Nuevo fabricante"}
+                                children={<RiAddFill />}
+                                onClick={() => {
+                                    onSetForm("fabricantes")
+                                    openModal();
+                                }}
+                            />
                         </div>
                         <LayoutModal />
                         <Table />
