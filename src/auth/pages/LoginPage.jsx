@@ -8,7 +8,7 @@ const loginFormFields = {
     password: ''
 }
 
-export const Loginpage = () => {
+export const LoginPage = () => {
     const { email, password, onInputChange } = useForm(loginFormFields);
     const { startLogin, errorMessage } = useAuthStore();
 

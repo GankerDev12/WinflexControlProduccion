@@ -30,16 +30,16 @@ export const Sidebar = () => {
                             </Link>
                         </li>
                         <li>
-                            <a href="" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
+                            <Link to="/impresion" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
                                 <FiPrinter />
                                 Impresión
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
+                            <Link to="/sellado" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
                                 <RiHandbagLine />
                                 Sellado
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <div className="border-b-2 pt-4 mb-2 text-gray-400 font-semibold">
@@ -48,22 +48,22 @@ export const Sidebar = () => {
                     </div>
                     <ul>
                         <li>
-                            <a href="" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
+                            <Link to="/totalExtrusion" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
                                 <LuScroll />
                                 Extrusión
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
+                            <Link to="/totalImpresion" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
                                 <RiPrinterLine />
                                 Impresión
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
+                            <Link to="/totalSellado" className="flex items-center gap-4 text-gray-400 font-semibold hover:bg-blue-400 p-4 hover:text-white rounded-lg transition-colors">
                                 <RiHandbagLine />
                                 Sellado
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <div className="border-b-2 pt-4 mb-2 text-gray-400 font-semibold">

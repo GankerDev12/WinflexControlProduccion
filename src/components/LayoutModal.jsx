@@ -1,12 +1,9 @@
 import Modal from "react-modal";
 import '../modal.css'
-import { ProductoForm } from "./forms/ProductoForm";
 import { useUiStore } from "../hooks/useUiStore";
-import { OperadorForm } from "./forms/OperadorForm";
-import { FabricanteForm } from "./forms/FabricanteForm";
-import { MaquinaForm } from "./forms/MaquinaForm";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import { FabricanteForm, MaquinaForm, OperadorForm, ProductoForm } from "./forms/index";
 
 export const LayoutModal = () => {
     const { isModalOpen, closeModal } = useUiStore()
@@ -19,6 +16,7 @@ export const LayoutModal = () => {
             right: 'auto',
             bottom: 'auto',
             marginRight: '-20%',
+            width: '100%'
         }
     }
 

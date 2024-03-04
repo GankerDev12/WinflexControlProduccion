@@ -1,11 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Loginpage, RegisterPage } from '../auth'
-import { DashboardPage } from '../dashboard/pages/DashboardPage'
+import { LoginPage, RegisterPage } from '../auth'
 import { useAuthStore } from '../hooks'
 import { useEffect } from 'react'
 import { Loader } from '../components/index'
-import { ExtrusionPage } from '../dashboard/pages/ExtrusionPage'
-import { GestionPage } from '../dashboard/pages/gestion/Gestion'
+import { ExtrusionPage, ImpresionPage, SelladoPage, GestionPage, TotalExtrusionPage, TotalImpresionPage, TotalSelladoPage, DashboardPage } from '../dashboard/index'
 
 export const AppRouter = () => {
   const { status, checkAuthToken } = useAuthStore();
@@ -26,27 +24,32 @@ export const AppRouter = () => {
     <>
       <Routes>
         {
+          // Rutas estaticas
           (status === 'not-authenticated')
             ? (
               <>
-                <Route path='/auth/*' element={<Loginpage />} />
+                <Route path='/auth/*' element={<LoginPage />} />
                 <Route path='/auth/register' element={<RegisterPage />} />
                 <Route path='/*' element={<Navigate to="/auth/login" />} />
               </>
             ) : (
+              // Rutas dinamicas
               <>
                 <Route path='/' element={<DashboardPage />} />
                 <Route path='/*' element={<Navigate to="/" />} />
 
                 //*Extrusiones, Impresiones y Sellado
                 <Route path='/extrusion' element={<ExtrusionPage />} />
+                <Route path='/impresion' element={<ImpresionPage />} />
+                <Route path='/sellado' element={<SelladoPage />} />
 
               //* Totales
-
+                <Route path='/totalExtrusion' element={<TotalExtrusionPage />} />
+                <Route path='/totalImpresion' element={<TotalImpresionPage />} />
+                <Route path='/totalSellado' element={<TotalSelladoPage />} />
 
                 //* Gestión
                 <Route path='/gestion' element={<GestionPage />} />
-
               </>
             )
 

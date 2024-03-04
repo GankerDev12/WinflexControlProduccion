@@ -1,14 +1,13 @@
 import { RiAddFill } from 'react-icons/ri'
-import { FloatButton } from '../../components/index'
-import { Header } from '../../components/Header'
-import { Sidebar } from '../../components/Sidebar'
+import { FloatButton } from '../../../components/index'
+import { Header } from '../../../components/Header'
+import { Sidebar } from '../../../components/Sidebar'
 import { LuScroll } from 'react-icons/lu'
-import { Table } from '../../components'
+import { Table } from '../../../components'
 
-
-export const ExtrusionPage = () => {
+export const TotalSelladoPage = () => {
     return (
-        <div className='minh-s-screen grid grid-col-1 lg:grid-cols-6'>
+        <div className='min-h-screen grid grid-col-1 lg:grid-cols-6'>
             <Sidebar />
             <FloatButton />
             <div className='col-span-5'>
@@ -22,8 +21,8 @@ export const ExtrusionPage = () => {
                             </div>
                         </div>
 
-                        <div className='ml-20 p-3 flex items-center justify-between'>
-                            <h3 className='font-semibold text-lg'>Extrusión</h3>
+                        <div className='ml-20 -3 flex items-center justify-between'>
+                            <h3 className='font-semibold text-lg'>Total sellado</h3>
                             <button className='flex items-center gap-2 bg-blue-500 text-white py-1 px-3 mr-6 rounded-lg hover:bg-blue-400 transition-colors'
                                 onClick={() => console.log('add extrusión')}//TODO: Agregar modal para insertar nueva extrusión 
                             >

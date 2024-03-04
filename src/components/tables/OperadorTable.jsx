@@ -15,69 +15,9 @@ export const Table = () => {
 
     const columns = [
         {
-            header: 'Fecha',
-            accessorKey: 'fecha',
-            footer: 'Fecha'
-        },
-        {
-            header: 'Máquina',
-            accessorKey: 'maquina',
-            footer: 'Máquina'
-        },
-        {
-            header: 'Turno',
-            accessorKey: 'turno',
-            footer: 'Turno'
-        },
-        {
-            header: 'Operador',
-            accessorKey: 'operador',
-            footer: 'Operador'
-        },
-        {
-            header: 'Fabricante',
-            accessorKey: 'fabricante',
-            footer: 'Fabricante'
-        },
-        {
-            header: 'Producto',
-            accessorKey: 'producto',
-            footer: 'Producto'
-        },
-        {
-            header: 'Op',
-            accessorKey: 'op',
-            footer: 'Op'
-        },
-        {
-            header: 'Np',
-            accessorKey: 'np',
-            footer: 'Np'
-        },
-        {
-            header: 'Medida',
-            accessorKey: 'medida',
-            footer: 'Medida'
-        },
-        {
-            header: 'Kilos extruidos',
-            accessorKey: 'kilos extruidos',
-            footer: 'Kilos extruidos'
-        },
-        {
-            header: 'Scrap',
-            accessorKey: 'scrap',
-            footer: 'Scrap'
-        },
-        {
-            header: 'Refil',
-            accessorKey: 'refil',
-            footer: 'Refil'
-        },
-        {
-            header: 'Scrap + refil',
-            accessorKey: 'scrap + refil',
-            footer: 'Scrap + refill'
+            header: 'Nombre',
+            accessorKey: 'Nombre',
+            footer: 'Nombre'
         },
         {
             header: '% scrap',
@@ -94,7 +34,6 @@ export const Table = () => {
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
@@ -193,22 +132,7 @@ export const Table = () => {
                     title={"Última página"}
                     onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 />
-                <select
-                    className='focus:border-gray-400 border-2 border-gray-200' 
-                    value={table.getState().pagination.pageSize}
-                    onChange={e => {
-                        table.setPageSize(e.target.value)
-                    }}
-                >
-                    {[10, 20, 30, 40, 50].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Mostrar {pageSize}
-                        </option>
-                    ))
-                    }
-                </select>
             </div>
-
         </div>
     )
 }
