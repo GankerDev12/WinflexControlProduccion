@@ -5,7 +5,7 @@ import { winflexApi } from "../api";
 export const useFabricanteStore = () => {
   const dispatch = useDispatch();
 
-  const { fabricantes } = useSelector(state => state.fabricantes);
+  //const { fabricantes } = useSelector(state => state.fabricantes);
   const { user } = useSelector(state => state.state.auth);
 
   const startSavingFabricante = async (fabricante) => {

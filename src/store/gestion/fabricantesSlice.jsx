@@ -4,11 +4,16 @@ export const fabricantesSlice = createSlice({
     name: 'fabricantes',
     initialState: {
         isloadingFabricantes: true,
-        fabricantes: []
+        fabricantes: [],
+        errorMessage: undefined
     },
     reducers: {
-         
+        isloadingFabricantes: (state) => {
+            state.status = true,
+                state.user = {},
+                state.errorMessage = undefined;
+        },
     },
 });
 
-export const { openSidebar, closeSidebar, onOpenModal, onCloseModal, showForm, setForm } = uiSlice.actions;
+export const { isloadingFabricantes } = fabricantesSlice.actions;
