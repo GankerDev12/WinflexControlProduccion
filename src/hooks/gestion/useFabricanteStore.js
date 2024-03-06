@@ -4,6 +4,7 @@ import { winflexApi } from "../api";
 
 export const useFabricanteStore = () => {
   const dispatch = useDispatch();
+  const { fabricantes } = useSelector(state => state.fabricantes)
 
   //const { fabricantes } = useSelector(state => state.fabricantes);
   const { user } = useSelector(state => state.state.auth);
@@ -25,8 +26,35 @@ export const useFabricanteStore = () => {
     }
   }
 
+  const startDeletingFabricante = async () => {
+    try {
+      await winflexApi.delete(`/fabricantes/${fabricante.id}`);
+      dispatch(onDeleteFabricante());
+    } catch (error) {
+      console.log(error);
+      Swal.fire('Error al eliminar', error.response.data.msg, 'error');
+    }
+
+  }
+
+  const startLoadingFabricantes = async () => {
+    try {
+      const { fabricantes } = await winflexApi.get('/fabricantes');
+      dispatch(onLoadFabricantes(fabricantes));
+    } catch (error) {
+      console.log('Error cargando eventos');
+      console.log(error);
+    }
+  }
+
   return (
-    
+    //*Propiedades
+    fabricantes,
+
+    //*Métodos
+    startSavingFabricante,
+    startDeletingFabricante,
+    startLoadingFabricantes
   )
 }
 
