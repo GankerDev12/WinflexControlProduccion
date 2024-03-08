@@ -126,5 +126,3 @@ export const GestionPage = () => {
         </div >
     )
 }
-
-//TODO: fabricante, maquina, operador, producto, 

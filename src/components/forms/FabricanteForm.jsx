@@ -1,23 +1,25 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
+import { useFabricanteStore } from '../../hooks'
 
 export const FabricanteForm = () => {
-
+    const { startSavingFabricante } = useFabricanteStore();
 
     return (
         < >
             <h1 className='font-bold'>Nuevo fabricante</h1>
-            <Formik initialValues={{
-                nombre: ''
-            }}
-                onSubmit={(valyues) => {
-                    console.log(valyues);
+            <Formik
+                initialValues={{
+                    nombre: ''
                 }}
                 validationSchema={Yup.object({
                     nombre: Yup.string()
                         .required('Requerido')
                 })}
+                onSubmit={(values) => {
+                    startSavingFabricante(values)
+                }}
             >
                 {(formik) => (
                     <Form className='mt-2 flex flex-col gap-2' >
@@ -35,13 +37,18 @@ export const FabricanteForm = () => {
                             className='text.sm text-red-400 self-center'
                         />
                         <div className='mt-4'>
-                            <button type='submit' className='bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 w-full'>Guardar</button>
+                            <button
+                                type='submit'
+                                className='bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 w-full'
+                            >
+                                Guardar
+                            </button>
                         </div>
                     </Form>
                 )}
 
 
-            </Formik>
+            </Formik >
 
         </>
     )

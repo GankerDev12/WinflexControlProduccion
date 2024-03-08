@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { winflexApi } from "../api";
+import { winflexApi } from "../../api/index";
 
 export const useFabricanteStore = () => {
   const dispatch = useDispatch();
   const { fabricantes } = useSelector(state => state.fabricantes)
 
-  //const { fabricantes } = useSelector(state => state.fabricantes);
-  const { user } = useSelector(state => state.state.auth);
+  const { user } = useSelector(state => state.auth);
 
   const startSavingFabricante = async (fabricante) => {
     try {
@@ -19,6 +18,7 @@ export const useFabricanteStore = () => {
       //Creando
       const { data } = await winflexApi.post('/fabricantes', fabricante);
       dispatch(onAddNewFabricante({ ...fabricante, id: data.fabricante.id, user }));
+      Swal.fire('Agregado correctamente', error.response.data.id, 'error');
 
     } catch (error) {
       console.log(error);
@@ -52,9 +52,8 @@ export const useFabricanteStore = () => {
     fabricantes,
 
     //*Métodos
-    startSavingFabricante,
-    startDeletingFabricante,
-    startLoadingFabricantes
+    startSavingFabricante(),
+    startDeletingFabricante(),
+    startLoadingFabricantes()
   )
 }
-

@@ -27,12 +27,28 @@ export const fabricantesSlice = createSlice({
         onDeleteFabricante: (state) => {
             state.fabricantes = state.fabricantes.filter(fabricante => fabricante.id);
         },
-        onLoadFabricantes: (state, {payload = []})=>{
+        onLoadFabricantes: (state, { payload = [] }) => {
             state.isloadingFabricantes = false;
-            
+            payload.forEach(fabricante => {
+                const exists = state.fabricantes.some(dbFabricante => dbFabricante.id === fabricante.id);
+                if (!exists) {
+                    state.fabricantes.push(fabricante);
+                }
+            })
+        },
+        onLogoutApp: (state) => {
+            state.isloadingFabricantes = true,
+                state.fabricantes = []
         }
 
     },
 });
 
-export const { isloadingFabricantes } = fabricantesSlice.actions;
+export const {
+    isloadingFabricantes,
+    onAddNewFabricante,
+    onDeleteFabricante,
+    onLoadFabricantes,
+    onLogoutApp,
+    onUpdateFabricante
+} = fabricantesSlice.actions;

@@ -10,7 +10,7 @@ export const store = configureStore({
         fabricantes: fabricantesSlice.reducer,
         maquinas: maquinasSlice.reducer,
         operadores: operadoresSlice.reducer,
-        productos: productosSlice.redurcer
+        productos: productosSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 });
