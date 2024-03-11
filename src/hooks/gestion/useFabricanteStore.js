@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { winflexApi } from "../../api/index";
+import { onAddNewFabricante, onDeleteFabricante, onLoadFabricantes, onUpdateFabricante } from '../../store/gestion';
+
+
 
 export const useFabricanteStore = () => {
   const dispatch = useDispatch();
-  const { fabricantes } = useSelector(state => state.fabricantes)
-
   const { user } = useSelector(state => state.auth);
 
   const startSavingFabricante = async (fabricante) => {
@@ -17,8 +18,8 @@ export const useFabricanteStore = () => {
       }
       //Creando
       const { data } = await winflexApi.post('/fabricantes', fabricante);
-      dispatch(onAddNewFabricante({ ...fabricante, id: data.fabricante.id, user }));
-      Swal.fire('Agregado correctamente', error.response.data.id, 'error');
+      dispatch(onAddNewFabricante({ ...fabricante, user }));
+      Swal.fire('Agregado correctamente', data.fabricante.nombre, 'success');
 
     } catch (error) {
       console.log(error);
@@ -39,21 +40,18 @@ export const useFabricanteStore = () => {
 
   const startLoadingFabricantes = async () => {
     try {
-      const { fabricantes } = await winflexApi.get('/fabricantes');
-      dispatch(onLoadFabricantes(fabricantes));
+      const { data } = await winflexApi.get('/fabricantes');
+      dispatch(onLoadFabricantes(data));
     } catch (error) {
       console.log('Error cargando eventos');
       console.log(error);
     }
   }
 
-  return (
-    //*Propiedades
-    fabricantes,
-
+  return {
     //*Métodos
-    startSavingFabricante(),
-    startDeletingFabricante(),
-    startLoadingFabricantes()
-  )
+    startSavingFabricante,
+    startDeletingFabricante,
+    startLoadingFabricantes
+  }
 }

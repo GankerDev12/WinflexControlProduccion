@@ -6,12 +6,14 @@ import { Sidebar } from '../../../components/Sidebar'
 import { useUiStore } from '../../../hooks/useUiStore'
 import { RiAddFill } from 'react-icons/ri'
 
+import { FabricantesTable } from '../../../components/tables/FabricanteTable'
+
 export const GestionPage = () => {
     const { openModal, onSetForm } = useUiStore()
     const productos = useRef(null)
     const operadores = useRef(null)
     const maquinas = useRef(null)
-    const fabricantes = useRef(null)
+    const fabricantesDiv = useRef(null)
 
     const handleRef = (ref) => {
         switch (ref) {
@@ -24,12 +26,11 @@ export const GestionPage = () => {
             case maquinas:
                 maquinas.current?.scrollIntoView({ behavior: 'smooth' });
                 break;
-            case fabricantes:
-                fabricantes.current?.scrollIntoView({ behavior: 'smooth' });
+            case fabricantesDiv:
+                fabricantesDiv.current?.scrollIntoView({ behavior: 'smooth' });
                 break;
         }
     }
-
 
     return (
         <div className='min-h-screen grid grid-col-1 lg:grid-cols-6'>
@@ -51,7 +52,7 @@ export const GestionPage = () => {
                         <button onClick={() => handleRef(maquinas)} >
                             <Cards title={"Máquinas"} />
                         </button>
-                        <button onClick={() => handleRef(fabricantes)}>
+                        <button onClick={() => handleRef(fabricantesDiv)}>
                             <Cards title={"Fabricantes"} />
                         </button>
                     </div>
@@ -74,7 +75,7 @@ export const GestionPage = () => {
                             </button>
                         </div>
                         <LayoutModal />
-                        <Table />
+
                     </div>
                     <div ref={operadores} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Operadores</h1>
@@ -89,7 +90,7 @@ export const GestionPage = () => {
                             />
                         </div>
                         <LayoutModal />
-                        <Table />
+
                     </div>
                     <div ref={maquinas} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Máquinas</h1>
@@ -104,9 +105,9 @@ export const GestionPage = () => {
                             />
                         </div>
                         <LayoutModal />
-                        <Table />
+
                     </div>
-                    <div ref={fabricantes} className='mt-4 border-t-2 border-gray-200'>
+                    <div ref={fabricantesDiv} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Fabricantes</h1>
                         <div className='flex justify-end mb-2'>
                             <Button
@@ -119,7 +120,7 @@ export const GestionPage = () => {
                             />
                         </div>
                         <LayoutModal />
-                        <Table />
+                        <FabricantesTable />
                     </div>
                 </div>
             </div>

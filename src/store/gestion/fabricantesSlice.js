@@ -3,14 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 export const fabricantesSlice = createSlice({
     name: 'fabricantes',
     initialState: {
-        isloadingFabricantes: true,
+        isloadingFabricantes: false,
         fabricantes: [],
         errorMessage: undefined
     },
     reducers: {
         isloadingFabricantes: (state) => {
-            state.status = true,
-                state.user = {},
+            state.isloadingFabricantes = true,
                 state.errorMessage = undefined;
         },
         onAddNewFabricante: (state, { payload }) => {
@@ -27,17 +26,19 @@ export const fabricantesSlice = createSlice({
         onDeleteFabricante: (state) => {
             state.fabricantes = state.fabricantes.filter(fabricante => fabricante.id);
         },
-        onLoadFabricantes: (state, { payload = [] }) => {
-            state.isloadingFabricantes = false;
-            payload.forEach(fabricante => {
+        onLoadFabricantes: (state, { payload }) => {
+            state.isloadingFabricantes = true;
+            const dbFabricantes = payload.fabricantes
+            dbFabricantes.forEach(fabricante => {
                 const exists = state.fabricantes.some(dbFabricante => dbFabricante.id === fabricante.id);
                 if (!exists) {
                     state.fabricantes.push(fabricante);
                 }
             })
+            state.isloadingFabricantes = false;
         },
         onLogoutApp: (state) => {
-            state.isloadingFabricantes = true,
+            state.isloadingFabricantes = false,
                 state.fabricantes = []
         }
 
