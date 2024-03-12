@@ -10,7 +10,7 @@ export const fabricantesSlice = createSlice({
     reducers: {
         isloadingFabricantes: (state) => {
             state.isloadingFabricantes = true,
-                state.errorMessage = undefined;
+            state.errorMessage = undefined;
         },
         onAddNewFabricante: (state, { payload }) => {
             state.fabricantes.push(payload);
@@ -39,7 +39,7 @@ export const fabricantesSlice = createSlice({
         },
         onLogoutApp: (state) => {
             state.isloadingFabricantes = false,
-                state.fabricantes = []
+            state.fabricantes = []
         }
 
     },

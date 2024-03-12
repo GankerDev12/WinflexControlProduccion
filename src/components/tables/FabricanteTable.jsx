@@ -13,15 +13,15 @@ import { useSelector } from 'react-redux';
 import { Loader } from '../ui/Loader';
 import { useFabricanteStore } from '../../hooks';
 
-export const FabricantesTable = () => {
-    const columns = [
-        {
-            header: 'nombre',
-            accessorKey: 'nombre',
-            footer: 'nombre'
-        },
-    ]
+const columns = [
+    {
+        header: 'nombre',
+        accessorKey: 'nombre',
+        footer: 'nombre'
+    },
+]
 
+export const FabricantesTable = () => {
     const [data, setData] = useState([])
     const [sorting, setSorting] = useState([]);
     const [filtering, setFiltering] = useState("");
@@ -99,7 +99,9 @@ export const FabricantesTable = () => {
                                         <tr key={row.id}>
                                             {
                                                 row.getVisibleCells().map((cell) => (
-                                                    <td className='text-left p-2 text-xs border-2 border-gray-300'
+                                                    <td
+                                                        key={cell.id}
+                                                        className='text-left p-2 text-xs border-2 border-gray-300'
                                                     >
                                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                                     </td>

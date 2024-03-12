@@ -6,7 +6,8 @@ import { Sidebar } from '../../../components/Sidebar'
 import { useUiStore } from '../../../hooks/useUiStore'
 import { RiAddFill } from 'react-icons/ri'
 
-import { FabricantesTable } from '../../../components/tables/FabricanteTable'
+import { FabricantesTable, TestTable } from '../../../components/'
+
 
 export const GestionPage = () => {
     const { openModal, onSetForm } = useUiStore()
@@ -105,7 +106,7 @@ export const GestionPage = () => {
                             />
                         </div>
                         <LayoutModal />
-
+                        <TestTable />
                     </div>
                     <div ref={fabricantesDiv} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Fabricantes</h1>

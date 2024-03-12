@@ -4,3 +4,7 @@ export * from './ui/Cards'
 export * from './LayoutModal'
 export * from './ui/Loader'
 export * from './Table'
+
+export * from './tables/FabricanteTable'
+//export * from './tables/OperadorTable'
+export * from './tables/TestTable'
