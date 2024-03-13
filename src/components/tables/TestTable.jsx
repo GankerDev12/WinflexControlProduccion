@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import DATA from '../../data/Enero.json'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
+import '../../test.css'
+import { EditableCell } from './EditableCell'
+
 const columns = [
     {
         accessorKey: 'fecha',
         header: 'Fecha',
-        cell: (props) => <p>{props.getValue()} </p>
+        cell: EditableCell
     },
     {
         accessorKey: 'maquina',
@@ -81,7 +84,13 @@ export const TestTable = () => {
     const table = useReactTable({
         data,
         columns,
-        getCoreRowModel: getCoreRowModel()
+        getCoreRowModel: getCoreRowModel(),
+        columnResizeMode: "onChange",
+        meta: {
+            updateData: (rowIndex, columnId, value) => setData(
+                //prev
+            )
+        }
     });
 
     return (
@@ -93,9 +102,16 @@ export const TestTable = () => {
                             {
                                 headerGroup.headers.map(header => (
                                     <th key={header.id}
+                                        className={`w-[${header.getSize()}px]`}
                                         onClick={header.column.getToggleSortingHandler()}
                                     >
-                                        {flexRender(header.column.columnDef.header, header.getContext())}
+                                        {header.column.columnDef.header}
+                                        <div
+                                            className={`resizer ${header.column.getIsResizing() ? "isResizing" : ""}`}
+                                            onMouseDown={header.getResizeHandler()}
+                                            onTouchStart={header.getResizeHandler()}
+                                        >
+                                        </div>
                                         {
                                             { asc: "⬆", desc: "⬇" }[
                                             header.column.getIsSorted() ?? null
@@ -117,7 +133,7 @@ export const TestTable = () => {
                                 row.getVisibleCells().map((cell) => (
                                     <td
                                         key={cell.id}
-                                        className={`text-left p-2 text-xs border-2 border-gray-300 w-[${cell.column.getSize()}]`}
+                                        className={`text-left p-2 text-xs border-2 border-gray-300 w-[${cell.column.getSize()}px]`}
                                     >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>

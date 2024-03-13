@@ -40,7 +40,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="op"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -54,7 +54,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="np"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -68,7 +68,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="tipoMaterial"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -82,7 +82,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="extrusion"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -96,7 +96,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="descripcion"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -110,7 +110,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="medidas"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -124,7 +124,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="kilosSolicitados"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -138,7 +138,7 @@ export const ProductoForm = () => {
                             <Field
                                 name="fabricante"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage

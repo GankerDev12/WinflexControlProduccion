@@ -17,7 +17,8 @@ const columns = [
     {
         header: 'nombre',
         accessorKey: 'nombre',
-        footer: 'nombre'
+        footer: 'nombre',
+        
     },
 ]
 

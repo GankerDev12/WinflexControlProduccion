@@ -29,7 +29,7 @@ export const MaquinaForm = () => {
                             <Field
                                 name="nombre"
                                 type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
@@ -44,7 +44,7 @@ export const MaquinaForm = () => {
                                 type="number"
                                 min={1}
                                 max={3}
-                                className='h-8 w-3/4 text-base border border-gray-300 rounde-md py-2 px-3 focus:outline-none focus:border-blue-500'
+                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
                         </div>
                         <ErrorMessage
