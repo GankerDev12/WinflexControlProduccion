@@ -87,12 +87,19 @@ export const TestTable = () => {
         getCoreRowModel: getCoreRowModel(),
         columnResizeMode: "onChange",
         meta: {
-            updateData: (rowIndex, columnId, value) => setData(
-                //prev
-            )
+            updateData: (rowIndex, columnId, value) =>
+                setData((prev) => {
+                    prev.map((row, index) =>
+                        index === rowIndex
+                            ? {
+                                ...prev[rowIndex],
+                                [columnId]: value
+                            } : row
+                    )
+                })
         }
     });
-
+    
     return (
         <table className={`border-collapse border-spacing-0 border-2 w-[${table.getTotalSize()}] border-gray-200`}>
             <thead className='bg-blue-500 text-white text-sm'>

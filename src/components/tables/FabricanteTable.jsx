@@ -7,7 +7,7 @@ import {
     getFilteredRowModel
 } from '@tanstack/react-table';
 import { Button } from '../ui/Button';
-import { RiArrowLeftFill, RiArrowRightFill } from 'react-icons/ri';
+import { RiArrowLeftFill, RiArrowRightFill, RiEdit2Fill } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Loader } from '../ui/Loader';
@@ -15,10 +15,15 @@ import { useFabricanteStore } from '../../hooks';
 
 const columns = [
     {
-        header: 'nombre',
+        header: 'Editar',
+        accessorKey: 'id',
+        cell: (props) => <Button title="" children={<RiEdit2Fill />} onClick={console.log(props.getValue())} />,
+        show: false
+    },
+    {
+        header: 'Nombre',
         accessorKey: 'nombre',
         footer: 'nombre',
-        
     },
 ]
 
@@ -53,7 +58,10 @@ export const FabricantesTable = () => {
             globalFilter: filtering
         },
         onSortingChange: setSorting,
-        onGlobalFilterChange: setFiltering
+        onGlobalFilterChange: setFiltering,
+        meta: {
+            showEditableModal: (props) => { }
+        }
     })
 
     return (
