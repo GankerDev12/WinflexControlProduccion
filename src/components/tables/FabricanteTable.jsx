@@ -12,30 +12,39 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Loader } from '../ui/Loader';
 import { useFabricanteStore } from '../../hooks';
-
-const columns = [
-    {
-        header: 'Editar',
-        accessorKey: 'id',
-        cell: (props) => <Button title="" children={<RiEdit2Fill />} onClick={console.log(props.getValue())} />,
-        show: false
-    },
-    {
-        header: 'Nombre',
-        accessorKey: 'nombre',
-        footer: 'nombre',
-    },
-]
+import { useUiStore } from '../../hooks/useUiStore';
 
 export const FabricantesTable = () => {
     const [data, setData] = useState([])
     const [sorting, setSorting] = useState([]);
     const [filtering, setFiltering] = useState("");
     const { isloadingFabricantes } = useSelector(state => state.fabricantes);
-
+    const { openModal, onSetForm } = useUiStore();
 
     const { fabricantes } = useSelector(state => state.fabricantes);
     const { startLoadingFabricantes } = useFabricanteStore();
+
+    const columns = [
+        {
+            header: 'Editar',
+            accessorKey: 'id',
+            cell: (props) => (
+                <button
+                    onClick={() => {
+                        onSetForm("fabricantes")
+                        openModal();
+                        localStorage.setItem('FabricanteEditar', props.getValue());
+                    }}
+                >Editar</button>
+            ),
+            show: false
+        },
+        {
+            header: 'Nombre',
+            accessorKey: 'nombre',
+            footer: 'nombre',
+        },
+    ]
 
     useEffect(() => {
         startLoadingFabricantes();
@@ -59,9 +68,6 @@ export const FabricantesTable = () => {
         },
         onSortingChange: setSorting,
         onGlobalFilterChange: setFiltering,
-        meta: {
-            showEditableModal: (props) => { }
-        }
     })
 
     return (

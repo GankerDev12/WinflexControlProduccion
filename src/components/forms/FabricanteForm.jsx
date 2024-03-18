@@ -2,16 +2,31 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
 import { useFabricanteStore } from '../../hooks'
+import { useSelector } from 'react-redux'
+
 
 export const FabricanteForm = () => {
     const { startSavingFabricante } = useFabricanteStore();
+    const { fabricantes } = useSelector(state => state.fabricantes);
+
+    const FabricanteEditar = localStorage.getItem('FabricanteEditar');
+    console.log(FabricanteEditar);
+    var nombre = ''
+    var title = 'Nuevo'
+    if (FabricanteEditar !== null) {
+        const fab = fabricantes.find(fabricante => fabricante.id === FabricanteEditar)
+        nombre = fab.nombre | '';
+        title = 'Editar'
+        localStorage.removeItem('FabricanteEditar');
+    }
+
 
     return (
         < >
-            <h1 className='font-bold'>Nuevo fabricante</h1>
+            <h1 className='font-bold'>{title} fabricante</h1>
             <Formik
                 initialValues={{
-                    nombre: ''
+                    nombre: nombre
                 }}
                 validationSchema={Yup.object({
                     nombre: Yup.string()

@@ -18,7 +18,6 @@ export const EditableCell = ({ getValue, row, column, table }) => {
             value={value}
             onChange={e => setValue(e.target.value)}
             onBlur={onBlur}
-
         />
     )
 }
