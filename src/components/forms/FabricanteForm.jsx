@@ -8,16 +8,15 @@ import { useSelector } from 'react-redux'
 export const FabricanteForm = () => {
     const { startSavingFabricante } = useFabricanteStore();
     const { fabricantes } = useSelector(state => state.fabricantes);
+    var fab = {}
 
     const FabricanteEditar = localStorage.getItem('FabricanteEditar');
-    console.log(FabricanteEditar);
     var nombre = ''
     var title = 'Nuevo'
     if (FabricanteEditar !== null) {
-        const fab = fabricantes.find(fabricante => fabricante.id === FabricanteEditar)
-        nombre = fab.nombre | '';
+        fab = fabricantes.find(fabricante => fabricante.id === FabricanteEditar)
+        nombre = fab.nombre;
         title = 'Editar'
-        localStorage.removeItem('FabricanteEditar');
     }
 
 
@@ -33,7 +32,17 @@ export const FabricanteForm = () => {
                         .required('Requerido')
                 })}
                 onSubmit={(values) => {
-                    startSavingFabricante(values)
+                    if (title === "Editar") {
+                        fab = {
+                            ...fab,
+                            nombre: values.nombre
+                        }
+                        startSavingFabricante(fab)
+                    }
+                    if (title === "Nuevo") {
+                        startSavingFabricante(values)
+                    }
+                    localStorage.removeItem('FabricanteEditar');
                 }}
             >
                 {(formik) => (

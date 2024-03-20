@@ -5,12 +5,13 @@ export const fabricantesSlice = createSlice({
     initialState: {
         isloadingFabricantes: false,
         fabricantes: [],
+        editingId: '',
         errorMessage: undefined
     },
     reducers: {
         isloadingFabricantes: (state) => {
             state.isloadingFabricantes = true,
-            state.errorMessage = undefined;
+                state.errorMessage = undefined;
         },
         onAddNewFabricante: (state, { payload }) => {
             state.fabricantes.push(payload);
@@ -25,6 +26,7 @@ export const fabricantesSlice = createSlice({
         },
         onDeleteFabricante: (state) => {
             state.fabricantes = state.fabricantes.filter(fabricante => fabricante.id);
+            console.log(state.fabricantes);
         },
         onLoadFabricantes: (state, { payload }) => {
             state.isloadingFabricantes = true;
@@ -39,7 +41,7 @@ export const fabricantesSlice = createSlice({
         },
         onLogoutApp: (state) => {
             state.isloadingFabricantes = false,
-            state.fabricantes = []
+                state.fabricantes = []
         }
 
     },

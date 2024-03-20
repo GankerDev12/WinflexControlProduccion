@@ -7,12 +7,13 @@ import {
     getFilteredRowModel
 } from '@tanstack/react-table';
 import { Button } from '../ui/Button';
-import { RiArrowLeftFill, RiArrowRightFill, RiEdit2Fill } from 'react-icons/ri';
+import { RiArrowLeftFill, RiArrowRightFill, RiDeleteBin2Fill, RiEdit2Fill } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Loader } from '../ui/Loader';
 import { useFabricanteStore } from '../../hooks';
 import { useUiStore } from '../../hooks/useUiStore';
+import Swal from 'sweetalert2';
 
 export const FabricantesTable = () => {
     const [data, setData] = useState([])
@@ -22,28 +23,57 @@ export const FabricantesTable = () => {
     const { openModal, onSetForm } = useUiStore();
 
     const { fabricantes } = useSelector(state => state.fabricantes);
-    const { startLoadingFabricantes } = useFabricanteStore();
+    const { startLoadingFabricantes, startDeletingFabricante } = useFabricanteStore();
 
     const columns = [
-        {
-            header: 'Editar',
-            accessorKey: 'id',
-            cell: (props) => (
-                <button
-                    onClick={() => {
-                        onSetForm("fabricantes")
-                        openModal();
-                        localStorage.setItem('FabricanteEditar', props.getValue());
-                    }}
-                >Editar</button>
-            ),
-            show: false
-        },
         {
             header: 'Nombre',
             accessorKey: 'nombre',
             footer: 'nombre',
         },
+        {
+            header: 'Editar',
+            accessorKey: 'id',
+            cell: (props) => (
+                <div className='flex gap-2 justify-end'>
+                    <Button
+                        title=''
+                        onClick={() => {
+                            onSetForm("fabricantes")
+                            openModal();
+                            localStorage.setItem('FabricanteEditar', props.getValue());
+                        }}
+                        children={<RiEdit2Fill />}
+                    />
+                    <Button
+                        title=''
+                        onClick={async () => {
+                            const { isDenied } = await Swal.fire({
+                                title: "Elimnar fabricante",
+                                text: "¿Estás seguro que deseas eliminar este registro?",
+                                icon: "warning",
+                                showDenyButton: true,
+                                showConfirmButton: false,
+                                showCancelButton: true,
+                                cancelButtonText: "Cancelar",
+                                denyButtonText: "Eliminar",
+                                confirmButtonColor: "#3b82f6",
+                            });
+                            localStorage.setItem('FabricanteEditar', props.getValue());
+                            console.log(isDenied);
+                            //TODO: ELIMINAR FABRICANTE SI ISDENIED = TRUE
+                            if (isDenied === true) {
+
+                                startDeletingFabricante(props.getValue());
+                            }
+                        }}
+                        children={<RiDeleteBin2Fill />}
+                        bg='bg-red-400'
+                    />
+                </div>
+            ),
+            show: false
+        }
     ]
 
     useEffect(() => {
