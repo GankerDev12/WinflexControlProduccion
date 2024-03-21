@@ -9,13 +9,15 @@ import {
 import { Button } from '../ui/Button';
 import { RiArrowLeftFill, RiArrowRightFill, RiDeleteBin2Fill, RiEdit2Fill } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../ui/Loader';
 import { useFabricanteStore } from '../../hooks';
 import { useUiStore } from '../../hooks/useUiStore';
 import Swal from 'sweetalert2';
+import { onEditID } from '../../store';
 
 export const FabricantesTable = () => {
+    const dispatch = useDispatch();
     const [data, setData] = useState([])
     const [sorting, setSorting] = useState([]);
     const [filtering, setFiltering] = useState("");
@@ -39,9 +41,9 @@ export const FabricantesTable = () => {
                     <Button
                         title=''
                         onClick={() => {
+                            dispatch(onEditID(props.getValue()));
                             onSetForm("fabricantes")
                             openModal();
-                            localStorage.setItem('FabricanteEditar', props.getValue());
                         }}
                         children={<RiEdit2Fill />}
                     />
@@ -49,7 +51,7 @@ export const FabricantesTable = () => {
                         title=''
                         onClick={async () => {
                             const { isDenied } = await Swal.fire({
-                                title: "Elimnar fabricante",
+                                title: "Eliminar fabricante",
                                 text: "¿Estás seguro que deseas eliminar este registro?",
                                 icon: "warning",
                                 showDenyButton: true,
@@ -59,11 +61,9 @@ export const FabricantesTable = () => {
                                 denyButtonText: "Eliminar",
                                 confirmButtonColor: "#3b82f6",
                             });
-                            localStorage.setItem('FabricanteEditar', props.getValue());
-                            console.log(isDenied);
                             //TODO: ELIMINAR FABRICANTE SI ISDENIED = TRUE
                             if (isDenied === true) {
-
+                                dispatch(onEditID(''))
                                 startDeletingFabricante(props.getValue());
                             }
                         }}

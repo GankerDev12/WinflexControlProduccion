@@ -24,8 +24,11 @@ export const fabricantesSlice = createSlice({
                 return fabricante;
             });
         },
-        onDeleteFabricante: (state) => {
-            state.fabricantes = state.fabricantes.filter(fabricante => fabricante.id);
+        onEditID: (state, { payload }) => {
+            state.editingId = payload;
+        },
+        onDeleteFabricante: (state, { payload }) => {
+            state.fabricantes = state.fabricantes.filter(fabricante => fabricante.id !== payload);
             console.log(state.fabricantes);
         },
         onLoadFabricantes: (state, { payload }) => {
@@ -53,5 +56,6 @@ export const {
     onDeleteFabricante,
     onLoadFabricantes,
     onLogoutApp,
-    onUpdateFabricante
+    onUpdateFabricante,
+    onEditID
 } = fabricantesSlice.actions;

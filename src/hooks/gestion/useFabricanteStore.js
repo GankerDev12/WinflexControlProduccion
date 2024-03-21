@@ -4,8 +4,6 @@ import { winflexApi } from "../../api/index";
 import { onAddNewFabricante, onDeleteFabricante, onLoadFabricantes, onUpdateFabricante } from '../../store/gestion';
 import { useUiStore } from '../useUiStore';
 
-//TODO: CAMBIAR LOCALSTORAGE POR editingId
-
 export const useFabricanteStore = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
@@ -35,9 +33,8 @@ export const useFabricanteStore = () => {
   const startDeletingFabricante = async (id) => {
     try {
       await winflexApi.delete(`/fabricantes/${id}`);
-      dispatch(onDeleteFabricante
-        ());
-      Swal.fire('Eliminado correctamente', id, 'success');
+      dispatch(onDeleteFabricante(id));
+      Swal.fire('Eliminado correctamente', '', 'success');
     } catch (error) {
       console.log(error);
       Swal.fire('Error al eliminar', error.response.data.msg, 'error');

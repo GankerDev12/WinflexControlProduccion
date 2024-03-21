@@ -2,19 +2,20 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React from 'react'
 import * as Yup from 'yup'
 import { useFabricanteStore } from '../../hooks'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { onEditID } from '../../store'
 
 
 export const FabricanteForm = () => {
+    const dispatch = useDispatch();
     const { startSavingFabricante } = useFabricanteStore();
-    const { fabricantes } = useSelector(state => state.fabricantes);
+    const { fabricantes, editingId } = useSelector(state => state.fabricantes);
     var fab = {}
 
-    const FabricanteEditar = localStorage.getItem('FabricanteEditar');
     var nombre = ''
     var title = 'Nuevo'
-    if (FabricanteEditar !== null) {
-        fab = fabricantes.find(fabricante => fabricante.id === FabricanteEditar)
+    if (editingId !== '') {
+        fab = fabricantes.find(fabricante => fabricante.id === editingId)
         nombre = fab.nombre;
         title = 'Editar'
     }
@@ -42,7 +43,7 @@ export const FabricanteForm = () => {
                     if (title === "Nuevo") {
                         startSavingFabricante(values)
                     }
-                    localStorage.removeItem('FabricanteEditar');
+                    dispatch(onEditID(''));
                 }}
             >
                 {(formik) => (

@@ -7,10 +7,14 @@ import { useUiStore } from '../../../hooks/useUiStore'
 import { RiAddFill } from 'react-icons/ri'
 
 import { FabricantesTable, TestTable } from '../../../components/'
+import { useDispatch } from 'react-redux'
+import { onEditID } from '../../../store'
 
 
 export const GestionPage = () => {
     const { openModal, onSetForm } = useUiStore()
+    const dispatch = useDispatch();
+
     const productos = useRef(null)
     const operadores = useRef(null)
     const maquinas = useRef(null)
@@ -115,8 +119,9 @@ export const GestionPage = () => {
                                 title={"Nuevo fabricante"}
                                 children={<RiAddFill />}
                                 onClick={() => {
-                                    onSetForm("fabricantes")
+                                    onSetForm("fabricantes");
                                     openModal();
+                                    dispatch(onEditID(''));
                                 }}
                             />
                         </div>
