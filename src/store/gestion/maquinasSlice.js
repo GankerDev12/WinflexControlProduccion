@@ -1,46 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const maquinasSlice = createSlice({
-    name: 'maquinas',
+    name: 'maquinass',
     initialState: {
-        isloadingMaquinas: true,
+        isloadingMaquinas: false,
         maquinas: [],
+        editingMaquinaId: '',
         errorMessage: undefined
     },
     reducers: {
         isloadingMaquinas: (state) => {
             state.isloadingMaquinas = true,
-                state.errorMessage = undefined
+                state.errorMessage = undefined;
         },
         onAddNewMaquina: (state, { payload }) => {
             state.maquinas.push(payload);
         },
-        onUpdateMaquina: (state) => {
+        onUpdateMaquina: (state, { payload }) => {
             state.maquinas = state.maquinas.map(maquina => {
                 if (maquina.id === payload.id) {
-                    return payload
+                    return payload;
                 }
                 return maquina;
             });
         },
-        onDeleteMaquina: (state) => {
-            state.maquinas = state.maquinas.filter(fabricante => fabricante.id);
+        onEditMaquinaId: (state, { payload }) => {
+            state.editingMaquinaId = payload;
+        },
+        onDeleteMaquina: (state, { payload }) => {
+            state.maquinas = state.maquinas.filter(maquina => maquina.id !== payload);
         },
         onLoadMaquinas: (state, { payload }) => {
             state.isloadingMaquinas = true;
-            const dbMaquinas = payload.maquinas;
+            const dbMaquinas = payload.maquinas
             dbMaquinas.forEach(maquina => {
-                const exists = state.fabricantes.some(dbMaquinas => dbMaquinas.id === maquina.id);
+                const exists = state.maquinas.some(dbMaquina => dbMaquina.id === maquina.id);
                 if (!exists) {
-                    state.fabricantes.push(maquina);
+                    state.maquinas.push(maquina);
                 }
-            });
+            })
             state.isloadingMaquinas = false;
         },
         onLogoutApp: (state) => {
-            state.isloadingMaquinas = false;
-            state.fabricantes = []
+            state.isloadingMaquinas = false,
+                state.maquinas = []
         }
+
     },
 });
 
@@ -50,5 +55,6 @@ export const {
     onDeleteMaquina,
     onLoadMaquinas,
     onLogoutApp,
-    onUpdateMaquina
+    onUpdateMaquina,
+    onEditMaquinaId
 } = maquinasSlice.actions;

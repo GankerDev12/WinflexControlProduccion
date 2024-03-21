@@ -1,22 +1,47 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from "yup";
+import { useOperadorStore } from '../../hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { onEditOperadorId } from '../../store';
 
 export const OperadorForm = () => {
+    const dispatch = useDispatch();
+    const { startSavingOperador } = useOperadorStore();
+    const { operadores, editingOperadorId } = useSelector(state => state.operadores);
+    var ope = {}
+
+    var nombre = ''
+    var title = 'Nuevo'
+    if (editingOperadorId !== '') {
+        ope = operadores.find(operador => operador.id === editingOperadorId)
+        nombre = ope.nombre;
+        title = 'Editar'
+    }
 
     return (
         < >
             <h1 className='font-bold'>Nuevo Operador</h1>
             <Formik
                 initialValues={{
-                    nombre: ''
-                }}
-                onSubmit={(values) => {
-                    console.log(values);
+                    nombre: nombre
                 }}
                 validationSchema={Yup.object({
                     nombre: Yup.string()
                         .required('Requerido')
                 })}
+                onSubmit={(values) => {
+                    if (title === "Editar") {
+                        ope = {
+                            ...ope,
+                            nombre: values.nombre
+                        }
+                        startSavingOperador(ope)
+                    }
+                    if (title === "Nuevo") {
+                        startSavingOperador(values)
+                    }
+                    dispatch(onEditOperadorId(''));
+                }}
             >
                 {(formik) => (
                     <Form className='mt-2 flex flex-col gap-2'>

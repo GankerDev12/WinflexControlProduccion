@@ -29,7 +29,6 @@ export const fabricantesSlice = createSlice({
         },
         onDeleteFabricante: (state, { payload }) => {
             state.fabricantes = state.fabricantes.filter(fabricante => fabricante.id !== payload);
-            console.log(state.fabricantes);
         },
         onLoadFabricantes: (state, { payload }) => {
             state.isloadingFabricantes = true;

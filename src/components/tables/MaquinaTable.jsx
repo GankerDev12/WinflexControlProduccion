@@ -6,32 +6,37 @@ import {
     getSortedRowModel,
     getFilteredRowModel
 } from '@tanstack/react-table';
-import { Button } from '../ui/Button';
-import { RiArrowLeftFill, RiArrowRightFill, RiDeleteBin2Fill, RiEdit2Fill } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
+import { RiArrowLeftFill, RiArrowRightFill, RiDeleteBin2Fill, RiEdit2Fill } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { Loader } from '../ui/Loader';
-import { useOperadorStore } from '../../hooks';
+import { useMaquinaStore } from '../../hooks';
 import { useUiStore } from '../../hooks/useUiStore';
 import Swal from 'sweetalert2';
-import { onEditOperadorId } from '../../store';
+import { onEditMaquinaId } from '../../store';
+import { Button } from '../ui/Button';
+import { Loader } from '../ui/Loader';
 
-export const OperadoresTable = () => {
+export const MaquinasTable = () => {
     const dispatch = useDispatch();
     const [data, setData] = useState([])
     const [sorting, setSorting] = useState([]);
     const [filtering, setFiltering] = useState("");
-    const { isloadingOperadores } = useSelector(state => state.operadores);
+    const { isloadingMaquinas } = useSelector(state => state.maquinas);
     const { openModal, onSetForm } = useUiStore();
 
-    const { operadores } = useSelector(state => state.operadores);
-    const { startLoadingOperadores, startDeletingOperador } = useOperadorStore();
+    const { maquinas } = useSelector(state => state.maquinas);
+    const { startLoadingMaquinas, startDeletingMaquina } = useMaquinaStore();
 
     const columns = [
         {
             header: 'Nombre',
             accessorKey: 'nombre',
             footer: 'nombre',
+        },
+        {
+            header: 'Planta',
+            accessorKey: 'planta',
+            footer: 'planta',
         },
         {
             header: 'Editar',
@@ -41,8 +46,8 @@ export const OperadoresTable = () => {
                     <Button
                         title=''
                         onClick={() => {
-                            dispatch(onEditOperadorId(props.getValue()));
-                            onSetForm("operadores")
+                            dispatch(onEditMaquinaId(props.getValue()));
+                            onSetForm("maquinas")
                             openModal();
                         }}
                         children={<RiEdit2Fill />}
@@ -51,7 +56,7 @@ export const OperadoresTable = () => {
                         title=''
                         onClick={async () => {
                             const { isDenied } = await Swal.fire({
-                                title: "Eliminar fabricante",
+                                title: "Eliminar máquina",
                                 text: "¿Estás seguro que deseas eliminar este registro?",
                                 icon: "warning",
                                 showDenyButton: true,
@@ -63,8 +68,8 @@ export const OperadoresTable = () => {
                             });
                             //TODO: ELIMINAR FABRICANTE SI ISDENIED = TRUE
                             if (isDenied === true) {
-                                dispatch(onEditOperadorId(''))
-                                startDeletingOperador(props.getValue());
+                                dispatch(onEditMaquinaId(''))
+                                startDeletingMaquina(props.getValue());
                             }
                         }}
                         children={<RiDeleteBin2Fill />}
@@ -77,12 +82,12 @@ export const OperadoresTable = () => {
     ]
 
     useEffect(() => {
-        startLoadingOperadores();
+        startLoadingMaquinas();
     }, [])
 
     useEffect(() => {
-        setData(operadores)
-    }, [operadores])
+        setData(maquinas)
+    }, [maquinas])
 
 
     const table = useReactTable({
@@ -102,7 +107,7 @@ export const OperadoresTable = () => {
 
     return (
         <div>
-            {(isloadingOperadores === true)
+            {(isloadingMaquinas === true)
                 ? (<><Loader /></>)
                 : (
                     <div>

@@ -19,8 +19,6 @@ export const FabricanteForm = () => {
         nombre = fab.nombre;
         title = 'Editar'
     }
-
-
     return (
         < >
             <h1 className='font-bold'>{title} fabricante</h1>

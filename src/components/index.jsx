@@ -6,5 +6,5 @@ export * from './ui/Loader'
 export * from './Table'
 
 export * from './tables/FabricanteTable'
-//export * from './tables/OperadorTable'
-export * from './tables/TestTable'
+export * from './tables/MaquinaTable'
+export * from './tables/OperadorTable'

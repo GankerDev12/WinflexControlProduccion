@@ -1,18 +1,35 @@
 import React from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from "yup";
+import { useDispatch, useSelector } from 'react-redux';
+import { useMaquinaStore } from '../../hooks';
+import { onEditMaquinaId } from '../../store';
 
 export const MaquinaForm = () => {
+    const dispatch = useDispatch();
+    const { startSavingMaquina } = useMaquinaStore();
+    const { maquinas, editingMaquinaId } = useSelector(state => state.maquinas);
+    var maq = {}
+
+    var nombre = ''
+    var planta = 0
+    var title = 'Nuevo'
+    if (editingMaquinaId !== '') {
+        maq = maquinas.find(maquina => maquina.id === editingMaquinaId)
+        nombre = maq.nombre;
+        planta = maq.planta
+        title = 'Editar'
+    }
+
+
+
     return (
         < >
             <h1 className='font-bold'>Nueva máquina</h1>
             <Formik
                 initialValues={{
-                    nombre: '',
-                    planta: 0
-                }}
-                onSubmit={(values) => {
-                    console.log(values);
+                    nombre: nombre,
+                    planta: planta
                 }}
                 validationSchema={Yup.object({
                     nombre: Yup.string()
@@ -20,6 +37,20 @@ export const MaquinaForm = () => {
                     planta: Yup.number()
                         .required('Requerido')
                 })}
+                onSubmit={(values) => {
+                    if (title === "Editar") {
+                        maq = {
+                            ...maq,
+                            nombre: values.nombre,
+                            planta: values.planta
+                        }
+                        startSavingMaquina(maq)
+                    }
+                    if (title === "Nuevo") {
+                        startSavingMaquina(values)
+                    }
+                    dispatch(onEditMaquinaId(''));
+                }}
             >
                 {(formik) => (
                     <Form className='mt-2 flex flex-col gap-2'>

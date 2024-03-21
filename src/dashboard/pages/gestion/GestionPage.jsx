@@ -1,12 +1,12 @@
 
 import { useRef } from 'react'
-import { Button, Cards, FloatButton, LayoutModal, Table } from '../../../components/index'
+import { Button, Cards, FloatButton, LayoutModal, MaquinasTable, FabricantesTable, OperadoresTable } from '../../../components/index'
 import { Header } from '../../../components/Header'
 import { Sidebar } from '../../../components/Sidebar'
 import { useUiStore } from '../../../hooks/useUiStore'
 import { RiAddFill } from 'react-icons/ri'
 
-import { FabricantesTable, TestTable } from '../../../components/'
+//import { FabricantesTable } from '../../../components/'
 import { useDispatch } from 'react-redux'
 import { onEditID } from '../../../store'
 
@@ -95,7 +95,7 @@ export const GestionPage = () => {
                             />
                         </div>
                         <LayoutModal />
-
+                        <OperadoresTable />
                     </div>
                     <div ref={maquinas} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Máquinas</h1>
@@ -110,7 +110,7 @@ export const GestionPage = () => {
                             />
                         </div>
                         <LayoutModal />
-                        <TestTable />
+                        <MaquinasTable />
                     </div>
                     <div ref={fabricantesDiv} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Fabricantes</h1>

@@ -21,7 +21,7 @@ export const useFabricanteStore = () => {
       }
       //Creando
       const { data } = await winflexApi.post('/fabricantes', fabricante);
-      dispatch(onAddNewFabricante({ ...fabricante, user }));
+      dispatch(onAddNewFabricante({ ...data.fabricante, user }));
       Swal.fire('Agregado correctamente', data.fabricante.nombre, 'success');
       closeModal();
     } catch (error) {
