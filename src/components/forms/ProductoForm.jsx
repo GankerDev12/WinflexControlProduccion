@@ -1,36 +1,89 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
+import { useProductoStore } from '../../hooks';
+import { onEditProductoId } from '../../store';
 
 export const ProductoForm = () => {
+    const { fabricantes } = useSelector(state => state.fabricantes)
+
+    const dispatch = useDispatch();
+    const { startSavingProducto, startLoadingProductos } = useProductoStore();
+    const { productos, editingProductoId } = useSelector(state => state.productos);
+    var prod = {}
+
+    var op = ''
+    var np = ''
+    var tipoMaterial = ''
+    var extrusion = ''
+    var descripcion = ''
+    var medidas = ''
+    var kgSolicitados = ''
+    var fabricante = ''
+
+    var title = 'Nuevo'
+    if (editingProductoId !== '') {
+        prod = productos.find(producto => producto.id === editingProductoId)
+        op = prod.op;
+        np = prod.np;
+        tipoMaterial = prod.tipoMaterial;
+        extrusion = prod.extrusion;
+        descripcion = prod.descripcion;
+        medidas = prod.medidas;
+        kgSolicitados = prod.kgSolicitados;
+        fabricante = prod.fabricante;
+
+        title = 'Editar'
+    }
+
     return (
         <>
-            <h1 className='font-bold'>Nuevo producto</h1>
+            <h1 className='font-bold'>{title} producto</h1>
             <Formik initialValues={{
-                op: '',
-                np: '',
-                tipoMaterial: '',
-                extrusion: '',
-                descripcion: '',
-                medidas: '',
-                kilosSolicitados: '',
-                fabricante: ''
+                op: op,
+                np: np,
+                tipoMaterial: tipoMaterial,
+                extrusion: extrusion,
+                descripcion: descripcion,
+                medidas: medidas,
+                kgSolicitados: kgSolicitados,
+                fabricante: fabricante,
             }}
-                onSubmit={(values) => {
-                    console.log(values);
-                }}
                 validationSchema={Yup.object({
-                    op: Yup.string(),
-                    np: Yup.string(),
+                    op: Yup.string().nullable(),
+                    np: Yup.string().nullable(),
                     tipoMaterial: Yup.string(),
                     extrusion: Yup.string(),
                     descripcion: Yup.string()
                         .required('requerido'),
                     medidas: Yup.string(),
-                    kilosSolicitados: Yup.string(),
+                    kgSolicitados: Yup.string(),
                     fabricante: Yup.string()
                         .required('requerido')
-
                 })}
+                onSubmit={(values) => {
+                    if (title === "Editar") {
+                        prod = {
+                            ...prod,
+                            op: values.op.toString(),
+                            np: values.np.toString(),
+                            tipoMaterial: values.tipoMaterial,
+                            extrusion: values.extrusion,
+                            descripcion: values.descripcion,
+                            medidas: values.medidas,
+                            kgSolicitados: values.kgSolicitados,
+                            fabricante: values.fabricante,
+                        }
+                        console.log(prod);
+                        startSavingProducto(prod)
+                        startLoadingProductos();
+                    }
+                    if (title === "Nuevo") {
+                        startSavingProducto(values)
+                        startLoadingProductos();
+                    }
+                    dispatch(onEditProductoId(''));
+                }}
             >
                 {(formik) => (
                     <Form className='mt-2 flex flex-col gap-2'>
@@ -122,7 +175,7 @@ export const ProductoForm = () => {
                             {/* Kilos solicitados */}
                             <label className='text-gray-600 w-1/4'>Kilos solicitados:</label>
                             <Field
-                                name="kilosSolicitados"
+                                name="kgSolicitados"
                                 type="text"
                                 className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
                             />
@@ -137,9 +190,16 @@ export const ProductoForm = () => {
                             <label className='text-gray-600 w-1/4'>Fabricante:</label>
                             <Field
                                 name="fabricante"
-                                type="text"
-                                className='h-8 w-3/4 text-base border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500'
-                            />
+                                as="select"
+                                className="flex items-center h-8 w-3/4 text-base border border-gray-300 rounded-md px-3 focus:outline-none focus:border-blue-500"
+                            >
+                                <option value="" >Selecciona un fabricante</option>
+                                {
+                                    fabricantes.map(fabricante => (
+                                        <option value={fabricante.id} key={fabricante.id}>{fabricante.nombre}</option>
+                                    ))
+                                }
+                            </Field>
                         </div>
                         <ErrorMessage
                             name="fabricante"

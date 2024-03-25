@@ -20,7 +20,7 @@ export const OperadorForm = () => {
 
     return (
         < >
-            <h1 className='font-bold'>Nuevo Operador</h1>
+            <h1 className='font-bold'>{title} Operador</h1>
             <Formik
                 initialValues={{
                     nombre: nombre

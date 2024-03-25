@@ -1,6 +1,6 @@
 
 import { useRef } from 'react'
-import { Button, Cards, FloatButton, LayoutModal, MaquinasTable, FabricantesTable, OperadoresTable } from '../../../components/index'
+import { Button, Cards, FloatButton, LayoutModal, MaquinasTable, FabricantesTable, OperadoresTable, ProductosTable } from '../../../components/index'
 import { Header } from '../../../components/Header'
 import { Sidebar } from '../../../components/Sidebar'
 import { useUiStore } from '../../../hooks/useUiStore'
@@ -8,8 +8,7 @@ import { RiAddFill } from 'react-icons/ri'
 
 //import { FabricantesTable } from '../../../components/'
 import { useDispatch } from 'react-redux'
-import { onEditID } from '../../../store'
-
+import { onEditID, onEditMaquinaId, onEditOperadorId, onEditProductoId } from '../../../store'
 
 export const GestionPage = () => {
     const { openModal, onSetForm } = useUiStore()
@@ -68,19 +67,18 @@ export const GestionPage = () => {
                     <div ref={productos} className='inline items-center'>
                         <h1 className='text-2xl font-semibold'>Productos</h1>
                         <div className='flex justify-end mb-2'>
-                            <button
-                                className='bg-blue-400 text-white text-sm p-2 rounded-md flex items-center gap-2 hover:bg-blue-300'
+                            <Button
+                                title={"Nuevo producto"}
+                                children={<RiAddFill />}
                                 onClick={() => {
                                     onSetForm("productos")
                                     openModal();
+                                    dispatch(onEditProductoId(''));
                                 }}
-                            >
-                                <RiAddFill />
-                                Nuevo producto
-                            </button>
+                            />
                         </div>
                         <LayoutModal />
-
+                        <ProductosTable />
                     </div>
                     <div ref={operadores} className='mt-4 border-t-2 border-gray-200'>
                         <h1 className='text-2xl font-semibold mt-2'>Operadores</h1>
@@ -91,6 +89,7 @@ export const GestionPage = () => {
                                 onClick={() => {
                                     onSetForm("operadores")
                                     openModal();
+                                    dispatch(onEditOperadorId(''));
                                 }}
                             />
                         </div>
@@ -106,6 +105,7 @@ export const GestionPage = () => {
                                 onClick={() => {
                                     onSetForm("maquinas")
                                     openModal();
+                                    dispatch(onEditMaquinaId(''));
                                 }}
                             />
                         </div>

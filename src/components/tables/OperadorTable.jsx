@@ -103,7 +103,9 @@ export const OperadoresTable = () => {
     return (
         <div>
             {(isloadingOperadores === true)
-                ? (<><Loader /></>)
+                ? (<div className='flex justify-center'>
+                    <Loader />
+                </div>)
                 : (
                     <div>
                         <div className='flex justify-end mb-4'>

@@ -16,7 +16,7 @@ export const LayoutModal = () => {
             right: 'auto',
             bottom: 'auto',
             marginRight: '-20%',
-            width: '100%'
+            width: '100%',
         }
     }
 

@@ -25,7 +25,7 @@ export const MaquinaForm = () => {
 
     return (
         < >
-            <h1 className='font-bold'>Nueva máquina</h1>
+            <h1 className='font-bold'>{title} máquina</h1>
             <Formik
                 initialValues={{
                     nombre: nombre,

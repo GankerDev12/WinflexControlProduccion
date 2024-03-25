@@ -26,8 +26,6 @@ export const ProductosTable = () => {
     const { productos, isloadingProductos } = useSelector(state => state.productos);
     const { startLoadingProductos, startDeletingProducto } = useProductoStore();
 
-    op, np, tipoMaterial, extrusion, descripcion, medidas, kgSolicitados, fabricante
-
     const columns = [
         {
             header: 'Op',
@@ -67,6 +65,7 @@ export const ProductosTable = () => {
         {
             header: 'Fabricante',
             accessorKey: 'fabricante',
+            cell: (props) => props.getValue().nombre,
             footer: 'fabricante',
         },
         {
@@ -77,8 +76,8 @@ export const ProductosTable = () => {
                     <Button
                         title=''
                         onClick={() => {
-                            dispatch(onEditID(props.getValue()));
-                            onSetForm("fabricantes")
+                            dispatch(onEditProductoId(props.getValue()));
+                            onSetForm("productos")
                             openModal();
                         }}
                         children={<RiEdit2Fill />}
@@ -138,8 +137,10 @@ export const ProductosTable = () => {
 
     return (
         <div>
-            {(isloadingFabricantes === true)
-                ? (<><Loader /></>)
+            {(isloadingProductos === true)
+                ? (<div className='flex justify-center'>
+                    <Loader />
+                </div>)
                 : (
                     <div>
                         <div className='flex justify-end mb-4'>

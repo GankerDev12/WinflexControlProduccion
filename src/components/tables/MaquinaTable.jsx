@@ -108,7 +108,9 @@ export const MaquinasTable = () => {
     return (
         <div>
             {(isloadingMaquinas === true)
-                ? (<><Loader /></>)
+                ? (<div className='flex justify-center'>
+                    <Loader />
+                </div>)
                 : (
                     <div>
                         <div className='flex justify-end mb-4'>
